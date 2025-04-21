@@ -1,0 +1,35 @@
+clc;
+clear;
+
+% User input
+f = input('Enter the function as @(x): ');
+a = input('Enter the lower limit a: ');
+b = input('Enter the upper limit b: ');
+tol = input('Enter the tolerance: ');
+maxIter = input('Enter the maximum number of iterations: ');
+
+% Check initial condition
+if f(a) * f(b) > 0
+    error('Function does not change sign in the interval. Choose different a and b.');
+end
+
+% Bisection Method
+for i = 1:maxIter
+    c = (a + b) /2;
+    fc = f(c);
+    
+    if abs(fc) < tol || (b-a)/2 <tol
+        fprintf('Root found at x = %.10f after %d iterations.\n', c, i);
+        return;
+    end
+    
+    if f(a) * fc < 0
+        b = c;
+    else
+        a = c;
+    end
+end
+
+% Final output if maxIter reached
+ 
+fprintf('Approximate root after %d iterations is x = %.10f\n', maxIter, c);
