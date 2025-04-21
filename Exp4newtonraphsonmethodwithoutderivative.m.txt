@@ -1,0 +1,32 @@
+clc;
+clear;
+
+f = input('Enter the Function: ');
+x0 = input('Enter the Initial Guess (x0): ');
+n = input('Enter Maximum Iteration No: ');
+e = input('Enter Tolerance: ');
+
+for i = 1:n
+    fx = f(x0);
+    h = 1e-6; 
+    dfx = (f(x0 + h) - f(x0 - h)) / (2 * h); 
+   
+    if abs(dfx) < eps
+        disp('Derivative is Zero, Newton-Raphson Method Fails.');
+        break;
+    end
+    
+    x1 = x0 - fx / dfx;
+    
+    if abs(x1 - x0) < e
+        fprintf('Root is Found at x = %.6f after %d Iterations\n', x1, i);
+        break;
+    end
+   
+    x0 = x1;
+    fprintf('Iteration %d: x = %.6f\n', i, x1);
+end
+
+if i == n
+    fprintf('Maximum iterations reached. Last estimate: x = %.6f\n', x1);
+end

@@ -1,0 +1,28 @@
+clc
+f = input('Enter the Function: ');
+% Input values for the interval
+a = input('Enter the Lower limit: ');
+b = input('Enter the Upper limit: ');
+n = input('Enter number of subintervals: '); %(miltiplication number of 3 = 3, 6, 9, 12)
+
+% Calculate the step size
+h = (b - a) / n;
+
+% Initialize the integral value
+integral = f(a) + f(b);
+
+% Apply Simpson's 3/8 rule
+for i = 1:n-1
+    x = a + i * h;
+    if mod(i, 3) == 0
+        integral = integral + 2 * f(x);  % Multiply by 2 for multiples of 3
+    else
+        integral = integral + 3 * f(x);  % Multiply by 3 for others
+    end
+end
+
+% Multiply by 3h/8 to finalize the approximation
+integral = integral * (3 * h / 8);
+
+% Display the result
+fprintf('Approximate integral using Simpsons 3/8 Rule: %.6f\n',integral);
