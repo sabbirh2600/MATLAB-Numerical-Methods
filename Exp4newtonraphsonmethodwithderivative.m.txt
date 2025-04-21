@@ -1,0 +1,22 @@
+clc
+clear
+f = input('Enter the Function: ');
+df = input('Enter the Derivative of the Function: ');
+x0 = input('Enter the Value of x: ');
+n = input('Enter Iteration No: ');
+e = input('Enter Tolerance: ');
+for i = 1:n
+    fx = f (x0);
+    dfx = df (x0);
+    if dfx == 0
+        disp('Derivative is Zero, Newtons Raphson Method Fails.');
+        break;
+    end
+    x1 = x0 - fx/dfx;
+    if abs(x1-x0)<e
+        fprintf('Root is Found at x=%.4f after %d Iteration\n', x1, i);
+        break;
+    end
+    x0=x1;
+    fprintf('Iteration %d:x=%.4f\n', i, x1);
+end

@@ -1,0 +1,22 @@
+clc;
+clear;
+
+% User input
+f = input('Enter the function as @(x): ');
+a = input('Enter the lower limit a: ');
+b = input('Enter the upper limit b: ');
+n = input('Enter the number of subintervals n: ');
+
+% Step size
+h = (b - a) / n;
+
+% Trapezoidal Rule calculation
+sum = 0.5 * (f(a) + f(b));
+for i = 1:n-1
+    x = a + i * h;
+    sum = sum + f(x);
+end
+I = h * sum;
+
+% Display result
+fprintf('The approximate value of the integral is: %.10f\n', I);
