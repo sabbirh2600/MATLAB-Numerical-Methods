@@ -1,0 +1,37 @@
+% Euler's ODE Solving Numerical Method - SabbirEEE13
+
+clc;
+clear;
+
+% Define the function dy/dx = f(x, y)
+f = input('Input your function as @(x,y): ', 's');  % Function input as string
+f = str2func(f);  % Convert the string to a function handle
+
+% Input initial conditions
+x0 = input('Enter initial x (x0): ');
+y0 = input('Enter initial y (y0): ');
+xn = input('Enter final x (xn) for calculating yn: ');
+h = input('Enter step size (h): ');
+
+% Calculate the number of steps
+n = (xn - x0) / h;  
+
+% Initialize arrays for x and y values
+x(1) = x0;
+y(1) = y0;
+
+% Check if n is valid (integer and positive)
+if mod(n, 1) ~= 0 || n <= 0
+    disp('Invalid number of steps (n). Ensure the step size and range are valid.');
+    return;
+end
+
+% Euler's Method loop for solving the ODE
+for i = 1:n
+    % Calculate the next value of y using Euler's method
+    y(i+1) = y(i) + h * f(x(i), y(i));
+    x(i+1) = x0 + i * h;  % Update the next x value
+    
+    % Display the results at each step
+    fprintf('y(%.2f) = %.4f\n', x(i+1), y(i+1));
+end
